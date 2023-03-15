@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, TouchableHighlight } from "react-native";
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
 export default function TemperatureSensor(props) {
   const [temperature, setTemperature] = useState(0);
   const [sensorStyle, setSensorStyle] = useState();
 
   useEffect(() => {
+    // Update indicator styling based on temperature
     if (temperature < 5) {
       setSensorStyle(styles.sensorCold);
     } else {
@@ -15,6 +16,7 @@ export default function TemperatureSensor(props) {
 
   return (
     <View style={styles.container}>
+      {/* Temperature up button */}
       <TouchableHighlight
         style={styles.tempChangeButton}
         onPress={() => {
@@ -24,10 +26,12 @@ export default function TemperatureSensor(props) {
         <Text style={styles.tempChangeText}>+</Text>
       </TouchableHighlight>
 
+      {/* Temperature indicator */}
       <View style={sensorStyle}>
         <Text style={styles.temperature}>{temperature}</Text>
       </View>
 
+      {/* Temperature down button */}
       <TouchableHighlight
         style={styles.tempChangeButton}
         onPress={() => {
@@ -42,37 +46,37 @@ export default function TemperatureSensor(props) {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   tempChangeButton: {
-    backgroundColor: "#ccc",
+    backgroundColor: '#ccc',
     width: 75,
     height: 75,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     margin: 10,
   },
   tempChangeText: {
     fontSize: 30,
   },
   sensorCold: {
-    backgroundColor: "blue",
+    backgroundColor: 'blue',
     width: 150,
     height: 150,
     margin: 10,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   sensorHot: {
-    backgroundColor: "red",
+    backgroundColor: 'red',
     width: 150,
     height: 150,
     margin: 10,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   temperature: {
     fontSize: 30,
-    color: "#fff",
+    color: '#fff',
   },
 });
