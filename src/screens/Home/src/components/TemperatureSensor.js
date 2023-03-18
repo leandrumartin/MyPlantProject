@@ -27,8 +27,8 @@ export default function TemperatureSensor(props) {
       </TouchableHighlight>
 
       {/* Temperature indicator */}
-      <View style={sensorStyle}>
-        <Text style={styles.temperature}>{temperature}</Text>
+      <View style={{ ...styles.sensor, ...sensorStyle }}>
+        <Text style={styles.temperatureText}>{temperature}</Text>
       </View>
 
       {/* Temperature down button */}
@@ -59,23 +59,20 @@ const styles = StyleSheet.create({
   tempChangeText: {
     fontSize: 30,
   },
-  sensorCold: {
-    backgroundColor: 'blue',
+  sensor: {
     width: 150,
     height: 150,
     margin: 10,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  sensorCold: {
+    backgroundColor: 'blue',
   },
   sensorHot: {
     backgroundColor: 'red',
-    width: 150,
-    height: 150,
-    margin: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  temperature: {
+  temperatureText: {
     fontSize: 30,
     color: '#fff',
   },

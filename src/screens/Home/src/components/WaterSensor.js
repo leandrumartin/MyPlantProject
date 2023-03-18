@@ -13,7 +13,10 @@ export default function WaterSensor(props) {
     <View style={styles.container}>
       <TouchableOpacity onPress={handleWater}>
         <View
-          style={isWatered ? styles.sensorWatered : styles.sensorUnwatered}
+          style={{
+            ...styles.sensor,
+            ...(isWatered ? styles.sensorWatered : styles.sensorUnwatered),
+          }}
         />
       </TouchableOpacity>
     </View>
@@ -21,14 +24,14 @@ export default function WaterSensor(props) {
 }
 
 const styles = StyleSheet.create({
-  sensorUnwatered: {
-    backgroundColor: 'green',
+  sensor: {
     width: 100,
     height: 100,
   },
+  sensorUnwatered: {
+    backgroundColor: 'green',
+  },
   sensorWatered: {
     backgroundColor: 'blue',
-    width: 100,
-    height: 100,
   },
 });
