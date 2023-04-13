@@ -1,20 +1,28 @@
-import React from 'react';
-import { StyleSheet, Text, View } from "react-native";
+import React, { Component }from 'react';
+import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import LandingScreen from './screens/Home';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Logs } from 'expo';
+import LandingScreen from './screens/Landing';
 import HomeScreen from './screens/Home';
 
-const RootStack = createStackNavigator();
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import init from 'react_native_mqtt';
+
+
+L
+
+
+const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator>
-        <RootStack.Screen name="Home" component={HomeScreen} />
-        <RootStack.Screen name="Landing" component={LandingScreen} />
-      </RootStack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Sensors" component={HomeScreen} />
+        <Tab.Screen name="Mqtt" component={LandingScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };

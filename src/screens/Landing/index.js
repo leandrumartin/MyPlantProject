@@ -13,10 +13,7 @@ const LandingScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text>apple</Text>
-      <Button
-        title="Go to home"
-        onPress={() => navigation.navigate('Home')}
-      />
+     
     </View>
   );
 };
