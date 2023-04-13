@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
 
 import WaterSensor from './src/components/WaterSensor';
@@ -12,18 +13,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <ScrollView>
+        
         <Sensor initial={10} label={'degrees'} />
         <Sensor initial={5} label={'Pa'} />
         <Sensor initial={0} label={'%'} />
         <WaterSensor />
-        <Button
-          title="Go to Landing"
-          onPress={() => navigation.navigate('Landing')}
-        />
+  
       </ScrollView>
     </View>
   );
