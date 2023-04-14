@@ -10,7 +10,7 @@ import {
 import { Input, Button} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import init from 'react_native_mqtt';
-
+ global.Json_data = 0;
 init({
   size: 10000,
   storageBackend: AsyncStorage,
@@ -98,6 +98,7 @@ class App_2 extends Component {
   }
   onChangeMessage = (text) => {
     this.setState({ message: text });
+
   }
   // send message
   sendMessage = () =>{
@@ -108,6 +109,7 @@ class App_2 extends Component {
   renderRow = ({ item, index }) => {
     idMessage = item.split(':');
     console.log('>>>ITEM', item);
+    
     return(
       <View 
         style={[
@@ -180,7 +182,7 @@ class App_2 extends Component {
                 }
               </View>
               {
-               
+               /*
                 this.state.subscribedTopic ?
                   <View style={{ marginBottom: 30, alignItems: 'center' }}>
                     <Input
@@ -200,7 +202,7 @@ class App_2 extends Component {
                   </View>
                 :
                   null
-                
+                */
               } 
             </View>
           :
@@ -225,6 +227,7 @@ class App_2 extends Component {
             keyExtractor={this._keyExtractor}
             extraData={this.state}
           />
+
         </View>
       </View>
     );
