@@ -6,12 +6,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Logs } from 'expo';
 import LandingScreen from './screens/Landing';
 import HomeScreen from './screens/Home';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import init from 'react_native_mqtt';
+import App_2 from './screens/Home/src/components/mqttfile';
 
 
-L
+
+
 
 
 const Tab = createBottomTabNavigator();
@@ -21,7 +20,7 @@ const App = () => {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Sensors" component={HomeScreen} />
-        <Tab.Screen name="Mqtt" component={LandingScreen} />
+        <Tab.Screen name="Mqtt" component={App_2} />
       </Tab.Navigator>
     </NavigationContainer>
   );
