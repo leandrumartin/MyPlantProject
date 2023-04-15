@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
 });
 
 const HomeScreen = () => {
+
   return (
     <View style={styles.container}>
       <ScrollView>
-        
         <Sensor initial={10} label={'degrees'} />
         <Sensor initial={5} label={'Pa'} />
         <Sensor initial={0} label={'%'} />

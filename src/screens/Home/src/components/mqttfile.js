@@ -7,10 +7,11 @@ import {
   FlatList,
 } from 'react-native';
 
+import { SensorContext } from '../../../../utils/sensorContext';
 import { Input, Button} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import init from 'react_native_mqtt';
- global.Json_data = 0;
+
 init({
   size: 10000,
   storageBackend: AsyncStorage,
@@ -109,7 +110,7 @@ class App_2 extends Component {
   renderRow = ({ item, index }) => {
     idMessage = item.split(':');
     console.log('>>>ITEM', item);
-    
+
     return(
       <View 
         style={[

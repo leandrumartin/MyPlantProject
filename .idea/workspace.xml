@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d8d8d507-9afd-4c7f-a68d-a58bfdbaab76" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Home/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Home/src/components/mqttfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home/src/components/mqttfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/MQTT.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/mqtt2.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
