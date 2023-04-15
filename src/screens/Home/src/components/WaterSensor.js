@@ -1,37 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-export default function WaterSensor(props) {
-  const [isWatered, setWatered] = useState(false);
+export default function WaterSensor({ initial }) {
+  const [sensorValue, setSensorValue] = useState(Number(initial));
+  const [indicatorStyle, setIndicatorStyle] = useState();
 
-  // Flip isWatered variable used for styling water indicator
-  const handleWater = () => {
-    setWatered(!isWatered);
-  };
+  useEffect(() => {
+    // Update indicator styling based on sensor value
+    if (sensorValue < 30) {
+      setIndicatorStyle(styles.indicatorLow);
+    } else {
+      setIndicatorStyle(styles.indicatorHigh);
+    }
+  }, [sensorValue]);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleWater}>
-        <View
-          style={{
-            ...styles.sensor,
-            ...(isWatered ? styles.sensorWatered : styles.sensorUnwatered),
-          }}
-        />
-      </TouchableOpacity>
+      {/* <TouchableOpacity onPress={handleWater}> */}
+      <View
+        style={{
+          ...styles.indicator,
+          ...indicatorStyle,
+        }}
+      />
+      {/* </TouchableOpacity> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  sensor: {
+  indicator: {
     width: 100,
     height: 100,
   },
-  sensorUnwatered: {
+  indicatorLow: {
     backgroundColor: 'green',
   },
-  sensorWatered: {
+  indicatorHigh: {
     backgroundColor: 'blue',
   },
 });

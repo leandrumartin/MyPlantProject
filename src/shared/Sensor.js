@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
+import App_2 from '../screens/Home/src/components/mqttfile';
+
 export default function Sensor({ initial, label }) {
   const [sensorValue, setSensorValue] = useState(Number(initial));
   const [indicatorStyle, setIndicatorStyle] = useState();
 
   useEffect(() => {
     // Update indicator styling based on sensor value
-    if (sensorValue < 5) {
+    if (sensorValue < 20) {
       setIndicatorStyle(styles.indicatorLow);
+    } else if (sensorValue < 40) {
+      setIndicatorStyle(styles.indicatorMidLow);
+    } else if (sensorValue < 60) {
+      setIndicatorStyle(styles.indicatorMidHigh);
     } else {
       setIndicatorStyle(styles.indicatorHigh);
     }
@@ -17,14 +23,14 @@ export default function Sensor({ initial, label }) {
   return (
     <View style={styles.container}>
       {/* Value up button */}
-      <TouchableHighlight
+      {/* <TouchableHighlight
         style={styles.valueChangeButton}
         onPress={() => {
           setSensorValue(sensorValue + 1);
         }}
       >
         <Text style={styles.valueChangeText}>+</Text>
-      </TouchableHighlight>
+      </TouchableHighlight> */}
 
       {/* Value indicator */}
       <View style={{ ...styles.indicator, ...indicatorStyle }}>
@@ -42,14 +48,14 @@ export default function Sensor({ initial, label }) {
       </View>
 
       {/* Value down button */}
-      <TouchableHighlight
+      {/* <TouchableHighlight
         style={styles.valueChangeButton}
         onPress={() => {
           setSensorValue(sensorValue - 1);
         }}
       >
         <Text style={styles.valueChangeText}>-</Text>
-      </TouchableHighlight>
+      </TouchableHighlight> */}
     </View>
   );
 }
@@ -70,6 +76,12 @@ const styles = StyleSheet.create({
   },
   indicatorHigh: {
     backgroundColor: 'red',
+  },
+  indicatorMidLow: {
+    backgroundColor: 'lightblue',
+  },
+  indicatorMidHigh: {
+    backgroundColor: 'pink',
   },
   valueChangeButton: {
     backgroundColor: '#ccc',
