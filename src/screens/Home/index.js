@@ -17,12 +17,11 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        
-        <Sensor initial={10} label={'degrees'} />
-        <Sensor initial={5} label={'Pa'} />
-        <Sensor initial={0} label={'%'} />
-        <WaterSensor />
-  
+        <Sensor initial={20} label={'degrees'} />
+        <Sensor initial={50} label={'Pa'} />
+        <Sensor initial={75} label={'%'} />
+        {/* <WaterSensor initial={50} /> */}
+        <Sensor initial={0} label={''} />
       </ScrollView>
     </View>
   );
