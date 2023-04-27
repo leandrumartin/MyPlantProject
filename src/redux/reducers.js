@@ -1,7 +1,9 @@
 import { ADD_SENSOR_DATA } from './actions';
 
 const initialState = {
-  sensorValue: 0,
+  sensorValue: {
+    humidity: '0',
+  },
 };
 
 const sensorReducer = (state = initialState, action) => {

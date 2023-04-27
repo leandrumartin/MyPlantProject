@@ -83,7 +83,7 @@ class App_2 extends Component {
     // this.MessageListRef.scrollToEnd({animated: false});
 
     // Send new data to Redux
-    dispatch({ type: ADD_SENSOR_DATA, payload: message.payloadString });
+    this.dispatch({ type: ADD_SENSOR_DATA, payload: message.payloadString });
   };
   onChangeTopic = (text) => {
     this.setState({ topic: text });
