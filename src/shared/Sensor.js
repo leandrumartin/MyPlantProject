@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { sensorReducer } from '../redux/reducers';
 
 export default function Sensor({ initial, label }) {
   const [sensorValue, setSensorValue] = useState(Number(initial));
   const [indicatorStyle, setIndicatorStyle] = useState();
 
+  const value = useSelector((state) => state.sensors.sensorValue);
+
   setTimeout(() => {
-    setSensorValue(sensorValue + 1);
-    // setSensorValue(dispatch(getData())); // Get the sensor value from the MQTT sensor in the Redux state;
-                                            // replace getData() with whatever we're calling the function
-  }, 5000)
+    // setSensorValue(sensorValue + 1);
+    // console.log(value);
+    setSensorValue(value); // Get the sensor value from the MQTT sensor in the Redux state
+  }, 5000);
 
   useEffect(() => {
     // Update indicator styling based on sensor value

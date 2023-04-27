@@ -5,6 +5,8 @@ import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
 import WaterSensor from './src/components/WaterSensor';
 import Sensor from '../../shared/Sensor';
 
+import ReduxTest from './src/components/ReduxTest';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -14,7 +16,6 @@ const styles = StyleSheet.create({
 });
 
 const HomeScreen = () => {
-
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -23,6 +24,7 @@ const HomeScreen = () => {
         <Sensor initial={75} label={'%'} />
         {/* <WaterSensor initial={50} /> */}
         <Sensor initial={0} label={''} />
+        <ReduxTest />
       </ScrollView>
     </View>
   );
