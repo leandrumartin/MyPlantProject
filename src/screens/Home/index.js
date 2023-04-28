@@ -21,7 +21,6 @@ const HomeScreen = () => {
         <Sensor initial={20} label={'degrees'} dataType={'temperature'} />
         <Sensor initial={50} label={'Pa'} dataType={'pressure'} />
         <Sensor initial={75} label={'%'} dataType={'humidity'} />
-        {/* <WaterSensor initial={50} /> */}
         <Sensor initial={0} label={''} />
         <ReduxTest />
       </ScrollView>

@@ -11,6 +11,9 @@ export default function Sensor({ initial, label, dataType }) {
   const value = useSelector((state) => state.sensors.sensorValue); // Get the sensor value from the MQTT sensor in the Redux state
 
   setTimeout(() => {
+    // console.log(value);
+    // console.log(JSON.stringify(value));
+    // console.log(JSON.parse(value));
     for (const [key, val] of Object.entries(value)) {
       if (key === dataType) {
         setSensorValue(Number(val));
@@ -20,11 +23,11 @@ export default function Sensor({ initial, label, dataType }) {
 
   useEffect(() => {
     // Update indicator styling based on sensor value
-    if (sensorValue < 20) {
+    if (sensorValue < 25) {
       setIndicatorStyle(styles.indicatorLow);
-    } else if (sensorValue < 40) {
+    } else if (sensorValue < 50) {
       setIndicatorStyle(styles.indicatorMidLow);
-    } else if (sensorValue < 60) {
+    } else if (sensorValue < 75) {
       setIndicatorStyle(styles.indicatorMidHigh);
     } else {
       setIndicatorStyle(styles.indicatorHigh);
