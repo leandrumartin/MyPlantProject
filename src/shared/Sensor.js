@@ -11,10 +11,7 @@ export default function Sensor({ initial, label, dataType }) {
   const value = useSelector((state) => state.sensors.sensorValue); // Get the sensor value from the MQTT sensor in the Redux state
 
   setTimeout(() => {
-    // console.log(value);
-    // console.log(JSON.stringify(value));
-    // console.log(JSON.parse(value));
-    for (const [key, val] of Object.entries(value)) {
+    for (const [key, val] of Object.entries(JSON.parse(value))) {
       if (key === dataType) {
         setSensorValue(Number(val));
       }

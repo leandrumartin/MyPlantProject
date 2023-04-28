@@ -11,7 +11,7 @@ export default function ReduxTest() {
   const handlePress = () => {
     dispatch({
       type: ADD_SENSOR_DATA,
-      payload: "{ 'temperature': '100', humidity: 7 }",
+      payload: '{ "temperature": 500, "humidity": 70 }',
     });
   };
 
