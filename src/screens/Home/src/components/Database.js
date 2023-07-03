@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
 } from 'react-native';
+import { object, string, number } from 'yup';
 
 import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabase('db.testDb'); // returns Database object
@@ -21,17 +22,13 @@ export default class Database extends React.Component {
       upperLimit: null,
       recLowerLimit: null,
       recUpperLimit: null,
+      validationError: null,
     };
-
-    db.transaction((tx) => {
-      tx.executeSql('DELETE FROM dingus)');
-      tx.executeSql('DROP TABLE dingus)');
-    });
 
     // Check if the items table exists if not create it
     db.transaction((tx) => {
       tx.executeSql(
-        'CREATE TABLE IF NOT EXISTS dingus (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, LowerLimit INT, UpperLimit INT, RecLowerLimit INT, RecUpperLimit INT)'
+        'CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, LowerLimit INT, UpperLimit INT, RecLowerLimit INT, RecUpperLimit INT)'
       );
     });
 
@@ -42,11 +39,11 @@ export default class Database extends React.Component {
     db.transaction((tx) => {
       // sending 4 arguments in executeSql
       tx.executeSql(
-        'SELECT * FROM dingus',
+        'SELECT * FROM items',
         null, // passing sql query and parameters:null
         // success callback which sends two things Transaction object and ResultSet Object
         (txObj, { rows: { _array } }) => {
-          this.setState({ data: _array });
+          this.setState({ ...this.state, data: _array });
           console.log(_array);
         },
         // failure callback which sends two things Transaction object and Error
@@ -71,74 +68,35 @@ export default class Database extends React.Component {
     this.setState({ recUpperLimit: newData });
   };
 
-  isInputValid = ({
-    name,
-    lowerLimit,
-    upperLimit,
-    recLowerLimit,
-    recUpperLimit,
-  }) => {
-    let valid = true;
-
-    // Check required fields
-    if (name === null) {
-      valid = false;
-    }
-    if (lowerLimit === null) {
-      valid = false;
-    }
-    if (upperLimit === null) {
-      valid = false;
-    }
-    if (recLowerLimit === null) {
-      valid = false;
-    }
-    if (recUpperLimit === null) {
-      valid = false;
-    }
-
-    // Validate types
-    if (parseInt(input) === NaN) {
-      valid = false;
-    }
-    if (parseInt(input) === NaN) {
-      valid = false;
-    }
-    if (parseInt(input) === NaN) {
-      valid = false;
-    }
-    if (parseInt(input) === NaN) {
-      valid = false;
-    }
-
-    return valid;
-  };
-
-  handleSubmit = () => {
-    if (this.isInputValid(this.state)) {
-      db.transaction((tx) => {
-        tx.executeSql(
-          'INSERT INTO dingus (Name, LowerLimit, UpperLimit, RecLowerLimit, RecUpperLimit) VALUES (?, ?, ?, ?, ?)',
-          [
-            this.state.name,
-            this.state.lowerLimit,
-            this.state.upperLimit,
-            this.state.recLowerLimit,
-            this.state.recUpperLimit,
-          ],
-          this.fetchData(),
-          (txObj, err) => console.log('Error ', err)
-        );
+  handleSubmit = async () => {
+    await mySchema
+      .validate(this.state)
+      .then(() => {
+        this.setState({ ...this.state, validationError: null });
+        db.transaction((tx) => {
+          tx.executeSql(
+            'INSERT INTO items (Name, LowerLimit, UpperLimit, RecLowerLimit, RecUpperLimit) VALUES (?, ?, ?, ?, ?)',
+            [
+              this.state.name,
+              this.state.lowerLimit,
+              this.state.upperLimit,
+              this.state.recLowerLimit,
+              this.state.recUpperLimit,
+            ],
+            this.fetchData(),
+            (txObj, err) => console.log('Error ', err)
+          );
+        });
+      })
+      .catch((err) => {
+        this.setState({ ...this.state, validationError: err });
+        console.log(err);
       });
-    } else {
-      console.log('All fields are required!');
-    }
   };
 
   handleClear = () => {
     db.transaction((tx) => {
-      tx.executeSql('DELETE FROM dingus)');
-      tx.executeSql('DROP TABLE dingus)');
+      tx.executeSql('DELETE FROM items');
     });
     this.setState({
       data: null,
@@ -184,6 +142,12 @@ export default class Database extends React.Component {
           // value={}
         />
 
+        <Text>
+          {this.state.validationError !== null
+            ? this.state.validationError.message
+            : ''}
+        </Text>
+
         <Button
           type="solid"
           title="Submit"
@@ -199,6 +163,29 @@ export default class Database extends React.Component {
     );
   }
 }
+
+const mySchema = object({
+  name: string().required(),
+  lowerLimit: number().required(),
+  upperLimit: number().required(),
+  recLowerLimit: number()
+    .required()
+    .when(
+      'lowerLimit',
+      (lowerLimit, recLowerLimit) => lowerLimit && recLowerLimit.min(lowerLimit)
+    )
+    .when(
+      'recUpperLimit',
+      (recUpperLimit, recLowerLimit) =>
+        recUpperLimit && recLowerLimit.max(recUpperLimit)
+    ),
+  recUpperLimit: number()
+    .required()
+    .when(
+      'upperLimit',
+      (upperLimit, recUpperLimit) => upperLimit && recUpperLimit.max(upperLimit)
+    ),
+});
 
 const styles = {
   container: {

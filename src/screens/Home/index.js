@@ -8,6 +8,8 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 
 import Sensor from '../../shared/Sensor';
@@ -26,7 +28,10 @@ const styles = StyleSheet.create({
 const HomeScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'none'}
+        style={styles.container}
+      >
         <ScrollView>
           <Sensor initial={0} label={'degrees'} dataType={'temperature'} />
           <Sensor initial={0} label={'Pa'} dataType={'pressure'} />
@@ -34,7 +39,7 @@ const HomeScreen = () => {
           <ReduxTest />
           <Database />
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };
