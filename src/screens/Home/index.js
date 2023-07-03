@@ -1,10 +1,19 @@
 import React from 'react';
 
-import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 
 import Sensor from '../../shared/Sensor';
 
 import ReduxTest from './src/components/ReduxTest';
+import Database from './src/components/Database';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,15 +25,17 @@ const styles = StyleSheet.create({
 
 const HomeScreen = () => {
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <Sensor initial={20} label={'degrees'} dataType={'temperature'} />
-        <Sensor initial={50} label={'Pa'} dataType={'pressure'} />
-        <Sensor initial={75} label={'%'} dataType={'humidity'} />
-        <Sensor initial={0} label={''} />
-        <ReduxTest />
-      </ScrollView>
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <ScrollView>
+          <Sensor initial={0} label={'degrees'} dataType={'temperature'} />
+          <Sensor initial={0} label={'Pa'} dataType={'pressure'} />
+          <Sensor initial={0} label={'%'} dataType={'humidity'} />
+          <ReduxTest />
+          <Database />
+        </ScrollView>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
