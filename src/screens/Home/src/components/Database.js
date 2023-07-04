@@ -149,6 +149,8 @@ export default class Database extends React.Component {
           title="Clear data"
           onPress={this.handleClear}
         ></Button>
+
+        <Text style={styles.text}>{JSON.stringify(this.state.data)}</Text>
       </View>
     );
   }
@@ -212,6 +214,9 @@ const styles = {
     padding: 2,
     borderWidth: 2,
     minWidth: 300,
+  },
+  text: {
+    maxWidth: 300,
   },
   errorText: {
     color: 'red',
