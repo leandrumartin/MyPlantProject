@@ -9,6 +9,7 @@ import HomeScreen from './screens/Home';
 import App_2 from './screens/Home/src/components/mqttfile';
 import store from './redux/store';
 import { Provider } from 'react-redux';
+import PlantsScreen from './screens/PlantsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,6 +20,7 @@ const App = () => {
         <Tab.Navigator>
           <Tab.Screen name="Sensors" component={HomeScreen} />
           <Tab.Screen name="Mqtt" component={App_2} />
+          <Tab.Screen name="Plants" component={PlantsScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>
