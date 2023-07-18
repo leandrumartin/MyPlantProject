@@ -11,6 +11,9 @@ import {
   Platform,
 } from 'react-native';
 import Database from './Home/src/components/Database';
+import Heatmap from './Home/src/components/Heatmap';
+import * as SQLite from 'expo-sqlite';
+import { useSelector } from 'react-redux';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const PlantsScreen = () => {
+export default function PlantsScreen() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -34,5 +37,3 @@ const PlantsScreen = () => {
     </TouchableWithoutFeedback>
   );
 };
-
-export default PlantsScreen;

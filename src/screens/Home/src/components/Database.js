@@ -8,11 +8,15 @@ import {
   Button,
 } from 'react-native';
 import { object, string, number, setLocale } from 'yup';
-
+import { useSelector } from 'react-redux';
 import * as SQLite from 'expo-sqlite';
+
+import WrapSelector from './WrapSelector';
+import Heatmap from './Heatmap';
+
 const db = SQLite.openDatabase('db.plantDb'); // returns Database object
 
-export default class Database extends React.Component {
+class Database extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -151,6 +155,8 @@ export default class Database extends React.Component {
         ></Button>
 
         <Text style={styles.text}>{JSON.stringify(this.state.data)}</Text>
+
+        <Heatmap width={50} height={50} data={this.state.data} />
       </View>
     );
   }
@@ -223,3 +229,5 @@ const styles = {
     maxWidth: 300,
   },
 };
+
+export default Database;
